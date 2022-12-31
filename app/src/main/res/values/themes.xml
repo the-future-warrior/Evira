@@ -18,4 +18,8 @@
         <item name="android:textSize">24dp</item>
         <item name="fontFamily">@font/poppins_bold</item>
     </style>
+
+    <style name="bottomNavbarTextAppearance">
+        <item name="fontFamily">@font/poppins_semibold</item>
+    </style>
 </resources>

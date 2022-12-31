@@ -1,6 +1,7 @@
 package com.mr_17.evira.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import android.app.Activity;
@@ -13,6 +14,7 @@ import com.mr_17.evira.R;
 public class LoginActivity extends AppCompatActivity {
 
     private AppCompatTextView signUpLink;
+    private AppCompatButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,19 @@ public class LoginActivity extends AppCompatActivity {
                 SendToActivity(SignUpActivity.class, true);
             }
         });
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendToActivity(UserDashboardActivity.class, false);
+            }
+        });
     }
 
     private void InitializeFields()
     {
         signUpLink = findViewById(R.id.sign_up_link);
+        loginButton = findViewById(R.id.login_button);
     }
 
     private void SendToActivity(Class<? extends Activity> activityClass, boolean backEnabled)
