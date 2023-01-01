@@ -30,10 +30,12 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText;
-    private AppCompatTextView signUpLink;
+    private AppCompatTextView needAccText, signUpLink;
     private AppCompatButton loginButton;
 
     private Toolbar toolbar;
+
+    private String type;
 
     private FirebaseAuth myAuth;
 
@@ -62,12 +64,35 @@ public class LoginActivity extends AppCompatActivity {
                 loadingBar.setMessage("Please Wait...");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
-                FirebaseModel.databaseRef_users.child(usernameEditText.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                FirebaseModel.databaseRef_users.child(usernameEditText.getText().toString()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists() && !usernameEditText.getText().toString().isEmpty())
                         {
-                            LoginUser(Objects.requireNonNull(snapshot.child(FirebaseModel.node_email).getValue()).toString(), passwordEditText.getText().toString());
+                            boolean allowed = false;
+                            String msg = "";
+                            switch (type)
+                            {
+                                case "User":
+                                    allowed = !(Boolean.parseBoolean(snapshot.child(FirebaseModel.node_isBlocked).getValue().toString()));
+                                    msg = "Sorry you cannot login, your account has been blocked.";
+                                    break;
+                                case "Admin":
+                                    allowed = Boolean.parseBoolean(snapshot.child(FirebaseModel.node_isAdmin).getValue().toString());
+                                    msg = "Sorry you are not authorised to enter here...";
+                                    break;
+                                case "Super Admin":
+                                    allowed = Boolean.parseBoolean(snapshot.child(FirebaseModel.node_isSuperAdmin).getValue().toString());
+                                    msg = "Sorry you are not authorised to enter here...";
+                                    break;
+                            }
+
+                            if(allowed)
+                                LoginUser(snapshot.child(FirebaseModel.node_email).getValue().toString(), passwordEditText.getText().toString());
+                            else {
+                                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                            }
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Invalid username...", Toast.LENGTH_SHORT).show();
@@ -88,10 +113,28 @@ public class LoginActivity extends AppCompatActivity {
     {
         myAuth = FirebaseAuth.getInstance();
 
+        type = getIntent().getStringExtra("type");
+
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(type + " " + "Login");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendToActivity(WelcomeActivity.class, false);
+            }
+        });
+
         usernameEditText = findViewById(R.id.username_edittext);
         passwordEditText = findViewById(R.id.password_edittext);
+        needAccText = findViewById(R.id.need_an_account);
         signUpLink = findViewById(R.id.sign_up_link);
         loginButton = findViewById(R.id.login_button);
+
+        if(type.equals("User"))
+        {
+            needAccText.setVisibility(View.VISIBLE);
+            signUpLink.setVisibility(View.VISIBLE);
+        }
     }
 
     private void SendToActivity(Class<? extends Activity> activityClass, boolean backEnabled)
@@ -143,5 +186,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        SendToActivity(WelcomeActivity.class, false);
     }
 }

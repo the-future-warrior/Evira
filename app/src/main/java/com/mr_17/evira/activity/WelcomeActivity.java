@@ -24,7 +24,21 @@ public class WelcomeActivity extends AppCompatActivity {
         userButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendToActivity(LoginActivity.class, true);
+                SendToActivity(LoginActivity.class, true, "User");
+            }
+        });
+
+        adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendToActivity(LoginActivity.class, true, "Admin");
+            }
+        });
+
+        superAdminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendToActivity(LoginActivity.class, true, "Super Admin");
             }
         });
     }
@@ -36,9 +50,10 @@ public class WelcomeActivity extends AppCompatActivity {
         superAdminButton = findViewById(R.id.super_admin_button);
     }
 
-    private void SendToActivity(Class<? extends Activity> activityClass, boolean backEnabled)
+    private void SendToActivity(Class<? extends Activity> activityClass, boolean backEnabled, String type)
     {
         Intent intent = new Intent(this, activityClass);
+        intent.putExtra("type", type);
 
         if (!backEnabled)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

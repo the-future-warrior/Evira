@@ -17,10 +17,15 @@ public class FirebaseModel
                         node_address = "address",
                         node_profilePic = "profilePic",
                         node_profileImages = "Profile Images",
-                        node_joiningDate = "joiningDate";
+                        node_joiningDate = "joiningDate",
+                        node_uids = "UIDs",
+                        node_isBlocked = "isBlocked",
+                        node_isAdmin = "isAdmin",
+                        node_isSuperAdmin = "isSuperAdmin";
 
     public static DatabaseReference databaseRef_root = FirebaseDatabase.getInstance().getReference();
     public static DatabaseReference databaseRef_users = databaseRef_root.child(node_users);
+    public static DatabaseReference databaseRef_uids = databaseRef_root.child(node_uids);
 
     //public static StorageReference storageRef_root = FirebaseStorage.getInstance().getReference();
     //public static StorageReference storageRef_profileImages = storageRef_root.child(node_profileImages);

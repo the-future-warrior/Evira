@@ -56,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isUsernameAvailable();
+                CreateNewAccount();
             }
         });
     }
@@ -157,6 +157,9 @@ public class SignUpActivity extends AppCompatActivity {
                                 profileMap.put(FirebaseModel.node_pan, pan);
                                 profileMap.put(FirebaseModel.node_aadhar, aadhar);
                                 profileMap.put(FirebaseModel.node_address, address);
+                                profileMap.put(FirebaseModel.node_isBlocked, "false");
+                                profileMap.put(FirebaseModel.node_isAdmin, "false");
+                                profileMap.put(FirebaseModel.node_isSuperAdmin, "false");
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 FirebaseModel.databaseRef_users.child(username).setValue("");
@@ -166,9 +169,15 @@ public class SignUpActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
 
-                                        SendToActivity(LoginActivity.class, false);
-                                        Toast.makeText(SignUpActivity.this, "Account Created Successfully.", Toast.LENGTH_LONG).show();
-                                        loadingBar.dismiss();
+                                        FirebaseModel.databaseRef_uids.child(currentUserID).setValue(username).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                SendToActivity(LoginActivity.class, false);
+                                                Toast.makeText(SignUpActivity.this, "Account Created Successfully.", Toast.LENGTH_LONG).show();
+                                                loadingBar.dismiss();
+                                            }
+                                        });
                                     }
                                 });
                             }
