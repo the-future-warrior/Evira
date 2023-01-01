@@ -61,6 +61,12 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         wishingMsg = findViewById(R.id.wishing_msg);
         wishingMsg.setText("Good " + GetWishing() + ",");
+        wishingMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendToActivity(ProductActivity.class, true);
+            }
+        });
 
         fullName = findViewById(R.id.full_name);
         profileImage = findViewById(R.id.profile_image);
