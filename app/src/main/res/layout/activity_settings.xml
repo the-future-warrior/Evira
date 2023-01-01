@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.SettingsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="Settings"
+        app:titleTextAppearance="@style/toolbarTitleAppearance"
+        app:titleTextColor="@color/white"
+        app:menu="@menu/settings_nav_menu"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        android:paddingBottom="110dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="110dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_baseline_person_24_white"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="4dp"
+                app:civ_circle_background_color="@color/black"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/edit_profile_image_button"
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:src="@drawable/icon_edit"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="@+id/profile_image" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/identity_cards_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/bg_button_black_border"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_image">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/identity_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User ID Cards"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    app:fontFamily="@font/poppins_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/upload_aadhar_button"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_button_black"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="16dp"
+                    android:text="Upload Aadhar Card"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/identity_heading" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/upload_pan_button"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="25dp"
+                    android:background="@drawable/bg_button_black"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="16dp"
+                    android:text="Upload Pan Card"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="@id/guideline2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_aadhar_button" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/view_aadhar_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    app:fontFamily="@font/poppins_bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/upload_aadhar_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/upload_aadhar_button"
+                    app:layout_constraintTop_toTopOf="@+id/upload_aadhar_button" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/view_pan_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    app:fontFamily="@font/poppins_bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/upload_pan_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/upload_pan_button"
+                    app:layout_constraintTop_toTopOf="@+id/upload_pan_button" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.8"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/personal_details_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/bg_button_black_border"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/identity_cards_container">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/personal_details_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Personal Details"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    app:fontFamily="@font/poppins_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/phone_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="Phone Number"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/personal_details_heading" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/phone_number_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="25dp"
+                    android:background="@drawable/bg_button_black_border"
+                    android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+                    android:drawablePadding="15dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:hint="Your phone number"
+                    android:inputType="phone"
+                    android:padding="16dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/phone_heading" />
+
+                <TextView
+                    android:id="@+id/address_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="Address"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/phone_number_edittext" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/address_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="25dp"
+                    android:background="@drawable/bg_button_black_border"
+                    android:drawableLeft="@drawable/ic_baseline_home_work_24"
+                    android:drawablePadding="15dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:hint="Your address"
+                    android:inputType="textMultiLine"
+                    android:padding="16dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/address_heading" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/save_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="25dp"
+                    android:background="@drawable/bg_button_black"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="16dp"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/address_edittext" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/orders_history_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/bg_button_black_border"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/personal_details_container">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/orders_history_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Orders History"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    app:fontFamily="@font/poppins_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/show_order_history_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/bg_button_black"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="16dp"
+                    android:text="View"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/orders_history_heading"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottom_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_button_black_top"
+        app:cnb_menuResource="@menu/bottom_nav_menu"
+        app:cnb_textAppearance="@style/bottomNavbarTextAppearance"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

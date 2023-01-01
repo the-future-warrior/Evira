@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    private String type;
+    private String type = "User";
 
     private FirebaseAuth myAuth;
 
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         myAuth = FirebaseAuth.getInstance();
 
-        type = getIntent().getStringExtra("type");
+        type = (getIntent().getStringExtra("type") == null) ? "User" : getIntent().getStringExtra("type");
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(type + " " + "Login");

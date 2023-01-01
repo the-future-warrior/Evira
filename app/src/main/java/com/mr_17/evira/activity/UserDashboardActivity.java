@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -22,14 +24,18 @@ import com.mr_17.evira.R;
 import com.mr_17.evira.adapter.CategoryRecyclerViewAdapter;
 import com.mr_17.evira.model.CategoryRecyclerViewModel;
 import com.mr_17.evira.model.FirebaseModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserDashboardActivity extends AppCompatActivity {
 
     private AppCompatTextView wishingMsg;
     private AppCompatTextView fullName;
+    private CircleImageView profileImage;
 
     private ChipNavigationBar chipNavigationBar;
 
@@ -45,6 +51,7 @@ public class UserDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_dashboard);
 
         InitializeFields();
+        InitializeUserData();
         InitializeCategoryRecyclerView();
     }
 
@@ -54,24 +61,44 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         wishingMsg = findViewById(R.id.wishing_msg);
         wishingMsg.setText("Good " + GetWishing() + ",");
-        wishingMsg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myAuth.signOut();
-                SendToActivity(WelcomeActivity.class, false);
-            }
-        });
 
         fullName = findViewById(R.id.full_name);
+        profileImage = findViewById(R.id.profile_image);
+
+        chipNavigationBar = findViewById(R.id.bottom_nav_bar);
+        chipNavigationBar.setItemSelected(R.id.dashboard, true);
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+                switch (chipNavigationBar.getSelectedItemId())
+                {
+                    case R.id.settings:
+                        SendToActivity(SettingsActivity.class, true);
+                        chipNavigationBar.setItemSelected(R.id.dashboard, true);
+                        break;
+                }
+
+            }
+        });
+    }
+
+    private void InitializeUserData()
+    {
+        SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
         FirebaseModel.databaseRef_uids.child(myAuth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists())
                 {
-                    FirebaseModel.databaseRef_users.child(snapshot.getValue().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    editor.putString("username", snapshot.getValue().toString());
+                    editor.apply();
+                    FirebaseModel.databaseRef_users.child(sharedPref.getString("username", "!@#")).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             fullName.setText(snapshot.child(FirebaseModel.node_firstName).getValue() + " " + snapshot.child(FirebaseModel.node_lastName).getValue());
+                            Picasso.get().load(snapshot.child(FirebaseModel.node_profilePic).getValue().toString()).into(profileImage);
                         }
 
                         @Override
@@ -87,9 +114,6 @@ public class UserDashboardActivity extends AppCompatActivity {
 
             }
         });
-
-        chipNavigationBar = findViewById(R.id.bottom_nav_bar);
-        chipNavigationBar.setItemSelected(R.id.dashboard, true);
     }
 
     private void InitializeCategoryRecyclerView()
