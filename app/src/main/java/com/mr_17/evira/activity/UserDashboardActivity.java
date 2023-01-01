@@ -45,6 +45,8 @@ public class UserDashboardActivity extends AppCompatActivity {
 
     private FirebaseAuth myAuth;
 
+    private ArrayList<String> categories = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,8 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         InitializeFields();
         InitializeUserData();
-        InitializeCategoryRecyclerView();
+        GetCategories();
+        //InitializeCategoryRecyclerView();
     }
 
     private void InitializeFields()
@@ -64,7 +67,7 @@ public class UserDashboardActivity extends AppCompatActivity {
         wishingMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendToActivity(ProductActivity.class, true);
+                SendToActivity(ProductsListActivity.class, true);
             }
         });
 
@@ -122,7 +125,29 @@ public class UserDashboardActivity extends AppCompatActivity {
         });
     }
 
-    private void InitializeCategoryRecyclerView()
+    private void GetCategories()
+    {
+        FirebaseModel.databaseRef_categories.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    for(DataSnapshot ds : snapshot.getChildren())
+                    {
+                        categories.add(ds.getKey());
+                    }
+                    InitializeCategoryRecyclerView(categories);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void InitializeCategoryRecyclerView(ArrayList<String> categories)
     {
         SetOnClickListener();
 
@@ -132,14 +157,32 @@ public class UserDashboardActivity extends AppCompatActivity {
         CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(list, this, listener);
         recyclerView.setAdapter(adapter);
 
-        list.add(new CategoryRecyclerViewModel("Clothes", 5, R.drawable.icon_clothes));
+        for(String category: categories)
+        {
+            FirebaseModel.databaseRef_categories.child(category).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists())
+                    {
+                        list.add(new CategoryRecyclerViewModel(category, (int)(snapshot.getChildrenCount()), R.drawable.icon_clothes));
+
+                        GridLayoutManager gridLayoutManager = new GridLayoutManager(UserDashboardActivity.this, 1);
+                        recyclerView.setLayoutManager(gridLayoutManager);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        /*list.add(new CategoryRecyclerViewModel("Clothes", 5, R.drawable.icon_clothes));
         list.add(new CategoryRecyclerViewModel("Bags", 5, R.drawable.icon_bags));
         list.add(new CategoryRecyclerViewModel("Shoes", 5, R.drawable.shoes));
         list.add(new CategoryRecyclerViewModel("Electronics", 6, R.drawable.icon_clothes));
-        list.add(new CategoryRecyclerViewModel("Jewellery", 5, R.drawable.icon_clothes));
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        list.add(new CategoryRecyclerViewModel("Jewellery", 5, R.drawable.icon_clothes));*/
     }
 
     private void SetOnClickListener()
@@ -148,7 +191,9 @@ public class UserDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v, int position)
             {
-
+                Intent intent = new Intent(UserDashboardActivity.this, ProductsListActivity.class);
+                intent.putExtra("category", categories.get(position));
+                startActivity(intent);
             }
         };
     }

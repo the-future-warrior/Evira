@@ -84,7 +84,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
                 categoryProductCount = itemView.findViewById(R.id.right_category_product_count);
                 backgroundImg = itemView.findViewById(R.id.right_background_img);
             //}
-            //textView.setOnClickListener(this);
+            cardView.setOnClickListener(this);
         }
 
         @Override
