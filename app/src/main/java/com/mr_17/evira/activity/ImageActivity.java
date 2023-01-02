@@ -79,7 +79,7 @@ public class ImageActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(ImageActivity.this, "Test", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ImageActivity.this, "No Image Available", Toast.LENGTH_SHORT).show();
                 }
             }
 

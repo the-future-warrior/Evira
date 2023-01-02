@@ -59,6 +59,74 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/admin_features_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_button_black_border"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/admin_features_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Features"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            app:fontFamily="@font/poppins_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_products_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/bg_button_black"
+            android:fontFamily="@font/poppins_semibold"
+            android:padding="16dp"
+            android:text="Add Products"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/admin_features_heading"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/view_user_details_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/bg_button_black"
+            android:fontFamily="@font/poppins_semibold"
+            android:padding="16dp"
+            android:text="View User Details"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_products_button"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -70,7 +138,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintTop_toBottomOf="@+id/admin_features_container"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -83,6 +151,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/dashboard_illustration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/illustration2"

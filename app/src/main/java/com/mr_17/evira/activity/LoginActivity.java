@@ -8,7 +8,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -51,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         signUpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendToActivity(SignUpActivity.class, true);
+                SendToActivity(SignUpActivity.class, true, "");
             }
         });
 
@@ -115,12 +117,17 @@ public class LoginActivity extends AppCompatActivity {
 
         type = (getIntent().getStringExtra("type") == null) ? "User" : getIntent().getStringExtra("type");
 
+        SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("type", type);
+        editor.apply();
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(type + " " + "Login");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendToActivity(WelcomeActivity.class, false);
+                SendToActivity(WelcomeActivity.class, false, "");
             }
         });
 
@@ -137,9 +144,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void SendToActivity(Class<? extends Activity> activityClass, boolean backEnabled)
+    private void SendToActivity(Class<? extends Activity> activityClass, boolean backEnabled, String type)
     {
         Intent intent = new Intent(this, activityClass);
+        intent.putExtra("type", type);
 
         if (!backEnabled)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -172,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
                         // sending user to main activity on successful sign in
-                        SendToActivity(UserDashboardActivity.class, false);
+                        SendToActivity(UserDashboardActivity.class, false, type);
                         //Toast.makeText(LoginActivity.this, "Logged in Successfully...", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }
@@ -190,6 +198,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        SendToActivity(WelcomeActivity.class, false);
+        SendToActivity(WelcomeActivity.class, false, "");
     }
 }

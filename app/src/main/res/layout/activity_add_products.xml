@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AddProductsActivity"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="Add Product"
+        app:titleTextAppearance="@style/toolbarTitleAppearance"
+        app:titleTextColor="@color/white" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        android:paddingBottom="55dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="25dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/bg_button_black_border"
+                app:layout_constraintDimensionRatio="0.95"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/add_product_image_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Tap here to add Product Image*"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/product_image"
+                app:layout_constraintEnd_toEndOf="@+id/product_image"
+                app:layout_constraintStart_toStartOf="@+id/product_image"
+                app:layout_constraintTop_toTopOf="@+id/product_image" />
+
+            <TextView
+                android:id="@+id/product_category_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Product Category*"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_image"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/product_category_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/bg_button_black_border"
+                android:entries="@array/categories"
+                android:textSize="16dp"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_category_heading" />
+
+            <TextView
+                android:id="@+id/product_name_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Product Name*"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_category_spinner"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/product_name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/bg_button_black_border"
+                android:drawableLeft="@drawable/ic_baseline_local_parking_24"
+                android:drawablePadding="15dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:hint="Enter Product Name"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_name_heading" />
+
+            <TextView
+                android:id="@+id/product_price_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Product Price*"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_name_edittext"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/product_price_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/bg_button_black_border"
+                android:drawableLeft="@drawable/ic_baseline_currency_rupee_24"
+                android:drawablePadding="15dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:hint="Enter Product Price"
+                android:inputType="number"
+                android:padding="16dp"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_price_heading" />
+
+            <TextView
+                android:id="@+id/product_description_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Product Description*"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_price_edittext"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/product_description_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/bg_button_black_border"
+                android:drawableLeft="@drawable/ic_baseline_description_24"
+                android:drawablePadding="15dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:hint="Enter Product Description"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_description_heading"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/add_product_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/bg_button_black"
+                android:fontFamily="@font/poppins_semibold"
+                android:padding="16dp"
+                android:text="Add Product"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_description_edittext"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

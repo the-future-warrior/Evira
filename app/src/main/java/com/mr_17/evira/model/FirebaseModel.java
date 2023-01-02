@@ -29,9 +29,10 @@ public class FirebaseModel
                         node_isAdmin = "isAdmin",
                         node_isSuperAdmin = "isSuperAdmin",
                         node_categories = "Categories",
+                        node_productImage = "productImage",
                         node_productName = "productName",
                         node_productPrice = "productPrice",
-                        node_description = "description";
+                        node_productDescription = "description";
 
     public static DatabaseReference databaseRef_root = FirebaseDatabase.getInstance().getReference();
     public static DatabaseReference databaseRef_users = databaseRef_root.child(node_users);
@@ -42,4 +43,5 @@ public class FirebaseModel
     public static StorageReference storageRef_profileImages = storageRef_root.child(node_profileImages);
     public static StorageReference storageRef_aadharImages = storageRef_root.child(node_aadharImages);
     public static StorageReference storageRef_panImages = storageRef_root.child(node_panImages);
+    public static StorageReference storageRef_categories = storageRef_root.child(node_categories);
 }

@@ -2,8 +2,10 @@ package com.mr_17.evira.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.AppCompatToggleButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +49,12 @@ public class UserDashboardActivity extends AppCompatActivity {
 
     private ArrayList<String> categories = new ArrayList<>();
 
+    private String type;
+    private ConstraintLayout adminFeaturesContainer;
+    private AppCompatButton addProductsButton, viewUserDetailsButton;
+
+    private SharedPreferences sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +64,24 @@ public class UserDashboardActivity extends AppCompatActivity {
         InitializeUserData();
         GetCategories();
         //InitializeCategoryRecyclerView();
+
+        addProductsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendToActivity(AddProductsActivity.class, true);
+            }
+        });
     }
 
     private void InitializeFields()
     {
+        sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+
         myAuth = FirebaseAuth.getInstance();
+        type = sharedPref.getString("type", "User");
+        adminFeaturesContainer = findViewById(R.id.admin_features_container);
+        addProductsButton = findViewById(R.id.add_products_button);
+        viewUserDetailsButton = findViewById(R.id.view_user_details_button);
 
         wishingMsg = findViewById(R.id.wishing_msg);
         wishingMsg.setText("Good " + GetWishing() + ",");
@@ -89,11 +110,21 @@ public class UserDashboardActivity extends AppCompatActivity {
 
             }
         });
+
+        switch (type)
+        {
+            case "User":
+                break;
+            case "Admin":
+                adminFeaturesContainer.setVisibility(View.VISIBLE);
+                break;
+            case "Super Admin":
+                break;
+        }
     }
 
     private void InitializeUserData()
     {
-        SharedPreferences sharedPref = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         FirebaseModel.databaseRef_uids.child(myAuth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -103,11 +134,14 @@ public class UserDashboardActivity extends AppCompatActivity {
                 {
                     editor.putString("username", snapshot.getValue().toString());
                     editor.apply();
-                    FirebaseModel.databaseRef_users.child(sharedPref.getString("username", "!@#")).addListenerForSingleValueEvent(new ValueEventListener() {
+                    FirebaseModel.databaseRef_users.child(snapshot.getValue().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            fullName.setText(snapshot.child(FirebaseModel.node_firstName).getValue() + " " + snapshot.child(FirebaseModel.node_lastName).getValue());
-                            Picasso.get().load(snapshot.child(FirebaseModel.node_profilePic).getValue().toString()).into(profileImage);
+                            if(snapshot.exists()) {
+                                fullName.setText(snapshot.child(FirebaseModel.node_firstName).getValue() + " " + snapshot.child(FirebaseModel.node_lastName).getValue());
+                                if(snapshot.child(FirebaseModel.node_profilePic).exists())
+                                    Picasso.get().load(snapshot.child(FirebaseModel.node_profilePic).getValue().toString()).into(profileImage);
+                            }
                         }
 
                         @Override
