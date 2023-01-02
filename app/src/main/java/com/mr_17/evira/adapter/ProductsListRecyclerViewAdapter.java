@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mr_17.evira.R;
 import com.mr_17.evira.model.CategoryRecyclerViewModel;
+import com.mr_17.evira.model.FirebaseModel;
 import com.mr_17.evira.model.ProductsListRecyclerViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,7 +50,8 @@ public class ProductsListRecyclerViewAdapter extends RecyclerView.Adapter<Produc
         alignLeft = position % 2 == 0;
         holder.productName.setText(model.getProductName());
         holder.productPrice.setText(model.getProductPrice());
-        holder.image.setImageDrawable(context.getResources().getDrawable(model.getImage()));
+        //holder.image.setImageDrawable(context.getResources().getDrawable(model.getImage()));
+        Picasso.get().load(model.getImageUrl()).into(holder.image);
     }
 
     @Override
@@ -67,7 +70,7 @@ public class ProductsListRecyclerViewAdapter extends RecyclerView.Adapter<Produc
 
             productPrice = itemView.findViewById(R.id.product_price);
             productName = itemView.findViewById(R.id.product_name);
-            image = itemView.findViewById(R.id.right_background_img);
+            image = itemView.findViewById(R.id.product_image);
 
             image.setOnClickListener(this);
         }

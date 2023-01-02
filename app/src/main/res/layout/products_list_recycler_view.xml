@@ -22,7 +22,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/right_background_img"
+                android:id="@+id/product_image"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:src="@drawable/sample_prod"
@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/right_background_img"
+                app:layout_constraintBottom_toBottomOf="@+id/product_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:background="@drawable/bg_button_black_bottom_solid">

@@ -46,6 +46,12 @@ public class ProductsListActivity extends AppCompatActivity {
         category = getIntent().getStringExtra("category");
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(category);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void InitializeCategoryRecyclerView()
@@ -67,7 +73,7 @@ public class ProductsListActivity extends AppCompatActivity {
                     {
                         list.add(new ProductsListRecyclerViewModel(snapshot.child(Integer.toString(i)).child(FirebaseModel.node_productName).getValue().toString(),
                                 "₹" + snapshot.child(Integer.toString(i)).child(FirebaseModel.node_productPrice).getValue().toString(),
-                                R.drawable.sample_prod));
+                                snapshot.child(Integer.toString(i)).child(FirebaseModel.node_productImage).getValue().toString()));
 
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductsListActivity.this, 2);
                         recyclerView.setLayoutManager(gridLayoutManager);
@@ -95,6 +101,9 @@ public class ProductsListActivity extends AppCompatActivity {
             public void onClick(View v, int position)
             {
                 Intent intent = new Intent(ProductsListActivity.this, ProductActivity.class);
+                intent.putExtra("price", list.get(position).getProductPrice());
+                intent.putExtra("name", list.get(position).getProductName());
+                intent.putExtra("imageURL", list.get(position).getImageUrl());
                 intent.putExtra("category", category);
                 intent.putExtra("index", position);
                 startActivity(intent);
