@@ -71,6 +71,13 @@ public class UserDashboardActivity extends AppCompatActivity {
                 SendToActivity(AddProductsActivity.class, true);
             }
         });
+
+        viewUserDetailsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendToActivity(UsersListActivity.class, true);
+            }
+        });
     }
 
     private void InitializeFields()

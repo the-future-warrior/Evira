@@ -68,6 +68,12 @@ public class ImageActivity extends AppCompatActivity {
             case "panPic":
                 ref = FirebaseModel.databaseRef_users.child(sharedPreferences.getString("username", "!@#")).child(FirebaseModel.node_panPic);
                 break;
+            case "userAadharPic":
+                ref = FirebaseModel.databaseRef_users.child(getIntent().getStringExtra("username")).child(FirebaseModel.node_aadharPic);
+                break;
+            case "userPanPic":
+                ref = FirebaseModel.databaseRef_users.child(getIntent().getStringExtra("username")).child(FirebaseModel.node_panPic);
+                break;
         }
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.UserDetailsActivity"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="Full Name"
+        app:titleTextAppearance="@style/toolbarTitleAppearance"
+        app:titleTextColor="@color/white"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        android:paddingBottom="80dp"
+        android:paddingEnd="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="110dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_baseline_person_24_white"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="4dp"
+                app:civ_circle_background_color="@color/black"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/first_name_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First Name : "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                android:layout_marginTop="25dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_image"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/first_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="First Name"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/first_name_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/last_name_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Name : "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/first_name"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/last_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Last Name"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/last_name_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/username_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username : "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/last_name"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/username_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/email_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email : "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/username"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/email_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/phone_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone : "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="1234567890"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/phone_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pan_number_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pan No. : "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pan_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="1234567890"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/pan_number_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pan_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pan Pic.: "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pan_number"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pan_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Click to view"
+                android:textColor="#3F51B5"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/pan_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/aadhar_number_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aadhar No. : "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pan_view"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/aadhar_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="1234567890"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/aadhar_number_heading" />
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/aadhar_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aadhar Pic.: "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aadhar_number"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/aadhar_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Click to view"
+                android:textColor="#3F51B5"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/aadhar_heading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/address_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address : "
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aadhar_view"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:fontFamily="@font/poppins_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/address_heading" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:visibility="gone"
+                android:id="@+id/block_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/bg_button_black"
+                android:fontFamily="@font/poppins_semibold"
+                android:padding="16dp"
+                android:text="Block User"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:visibility="gone"
+                android:id="@+id/unblock_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/bg_button_black"
+                android:fontFamily="@font/poppins_semibold"
+                android:padding="16dp"
+                android:text="Unblock User"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
