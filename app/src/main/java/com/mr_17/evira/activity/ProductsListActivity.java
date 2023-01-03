@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -29,6 +30,7 @@ public class ProductsListActivity extends AppCompatActivity {
     private ProductsListRecyclerViewAdapter.RecyclerViewClickListener listener;
 
     private Toolbar toolbar;
+    private LinearProgressIndicator progressIndicator;
 
     private String category;
 
@@ -52,6 +54,7 @@ public class ProductsListActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        progressIndicator = findViewById(R.id.loading_bar);
     }
 
     private void InitializeCategoryRecyclerView()
@@ -78,6 +81,7 @@ public class ProductsListActivity extends AppCompatActivity {
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(ProductsListActivity.this, 2);
                         recyclerView.setLayoutManager(gridLayoutManager);
                     }
+                    progressIndicator.setVisibility(View.GONE);
                 }
             }
 
@@ -105,7 +109,7 @@ public class ProductsListActivity extends AppCompatActivity {
                 intent.putExtra("name", list.get(position).getProductName());
                 intent.putExtra("imageURL", list.get(position).getImageUrl());
                 intent.putExtra("category", category);
-                intent.putExtra("index", position);
+                intent.putExtra("index", Integer.toString(position + 1));
                 startActivity(intent);
             }
         };

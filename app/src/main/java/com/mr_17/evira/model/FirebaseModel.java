@@ -32,7 +32,8 @@ public class FirebaseModel
                         node_productImage = "productImage",
                         node_productName = "productName",
                         node_productPrice = "productPrice",
-                        node_productDescription = "description";
+                        node_productDescription = "description",
+                        node_cart = "cart";
 
     public static DatabaseReference databaseRef_root = FirebaseDatabase.getInstance().getReference();
     public static DatabaseReference databaseRef_users = databaseRef_root.child(node_users);

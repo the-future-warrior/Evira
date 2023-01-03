@@ -215,6 +215,10 @@ public class SettingsActivity extends AppCompatActivity {
                     case R.id.dashboard:
                         SendToActivity(UserDashboardActivity.class, true);
                         break;
+
+                    case R.id.cart:
+                        SendToActivity(CartActivity.class, true);
+                        break;
                 }
                 chipNavigationBar.setItemSelected(R.id.settings, true);
             }

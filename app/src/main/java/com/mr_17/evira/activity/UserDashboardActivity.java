@@ -104,10 +104,14 @@ public class UserDashboardActivity extends AppCompatActivity {
                 {
                     case R.id.settings:
                         SendToActivity(SettingsActivity.class, true);
-                        chipNavigationBar.setItemSelected(R.id.dashboard, true);
+                        break;
+
+                    case R.id.cart:
+                        SendToActivity(CartActivity.class, true);
                         break;
                 }
 
+                chipNavigationBar.setItemSelected(R.id.dashboard, true);
             }
         });
 

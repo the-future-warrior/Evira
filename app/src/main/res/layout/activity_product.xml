@@ -245,13 +245,14 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Get a little lift from these Sam Edelman sandals featuring ruched straps and leather lace-up ties, while a braided jute sole makes a fresh statement for summer."
+                android:text="Loading..."
                 android:textColor="@color/grey"
                 android:textSize="15dp"
                 app:fontFamily="@font/poppins_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/description_heading" />
+                app:layout_constraintTop_toBottomOf="@id/description_heading"
+                app:layout_constraintHorizontal_bias="0.0"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/add_to_cart_button"
