@@ -123,6 +123,7 @@ public class UserDetailsActivity extends AppCompatActivity
         //aadharURL.setText(getIntent().getStringExtra("aadharURL"));
 
         profileImage = findViewById(R.id.profile_image);
+        if(!(getIntent().getStringExtra("profilePicURL")).equals(""))
         Picasso.get().load(getIntent().getStringExtra("profilePicURL")).into(profileImage);
 
         address = findViewById(R.id.address);

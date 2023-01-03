@@ -51,7 +51,8 @@ public class UserDashboardActivity extends AppCompatActivity {
 
     private String type;
     private ConstraintLayout adminFeaturesContainer;
-    private AppCompatButton addProductsButton, viewUserDetailsButton;
+    private AppCompatTextView adminFeaturesHeading;
+    private AppCompatButton addProductsButton, viewUserDetailsButton, viewAdminDetailsButton;
 
     private SharedPreferences sharedPref;
 
@@ -75,7 +76,14 @@ public class UserDashboardActivity extends AppCompatActivity {
         viewUserDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendToActivity(UsersListActivity.class, true);
+                SendToActivity(UsersListActivity.class, true, "users");
+            }
+        });
+
+        viewAdminDetailsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendToActivity(UsersListActivity.class, true, "admins");
             }
         });
     }
@@ -87,8 +95,10 @@ public class UserDashboardActivity extends AppCompatActivity {
         myAuth = FirebaseAuth.getInstance();
         type = sharedPref.getString("type", "User");
         adminFeaturesContainer = findViewById(R.id.admin_features_container);
+        adminFeaturesHeading = findViewById(R.id.admin_features_heading);
         addProductsButton = findViewById(R.id.add_products_button);
         viewUserDetailsButton = findViewById(R.id.view_user_details_button);
+        viewAdminDetailsButton = findViewById(R.id.view_admin_details_button);
 
         wishingMsg = findViewById(R.id.wishing_msg);
         wishingMsg.setText("Good " + GetWishing() + ",");
@@ -130,6 +140,10 @@ public class UserDashboardActivity extends AppCompatActivity {
                 adminFeaturesContainer.setVisibility(View.VISIBLE);
                 break;
             case "Super Admin":
+                adminFeaturesContainer.setVisibility(View.VISIBLE);
+                adminFeaturesHeading.setText("Super Admin Features");
+                addProductsButton.setVisibility(View.GONE);
+                viewAdminDetailsButton.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -261,6 +275,20 @@ public class UserDashboardActivity extends AppCompatActivity {
     private void SendToActivity(Class<? extends Activity> activityClass, boolean backEnabled)
     {
         Intent intent = new Intent(this, activityClass);
+
+        if (!backEnabled)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(intent);
+
+        if (!backEnabled)
+            finish();
+    }
+
+    private void SendToActivity(Class<? extends Activity> activityClass, boolean backEnabled, String type)
+    {
+        Intent intent = new Intent(this, activityClass);
+        intent.putExtra("type", type);
 
         if (!backEnabled)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

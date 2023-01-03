@@ -74,7 +74,20 @@ public class UsersListActivity extends AppCompatActivity {
                     DataSnapshot childSnapshot = snapshot.child(username);
                     //Toast.makeText(UsersListActivity.this, snapshot.child(FirebaseModel.node_firstName).getValue().toString(), Toast.LENGTH_SHORT).show();
 
-                    if(!Boolean.parseBoolean(childSnapshot.child(FirebaseModel.node_isAdmin).getValue().toString()) && !Boolean.parseBoolean(childSnapshot.child(FirebaseModel.node_isSuperAdmin).getValue().toString())) {
+                    boolean check = false;
+
+                    switch (getIntent().getStringExtra("type"))
+                    {
+                        case "users":
+                            check = !Boolean.parseBoolean(childSnapshot.child(FirebaseModel.node_isAdmin).getValue().toString()) && !Boolean.parseBoolean(childSnapshot.child(FirebaseModel.node_isSuperAdmin).getValue().toString());
+                            break;
+                        case "admins":
+                            check = Boolean.parseBoolean(childSnapshot.child(FirebaseModel.node_isAdmin).getValue().toString()) && !Boolean.parseBoolean(childSnapshot.child(FirebaseModel.node_isSuperAdmin).getValue().toString());
+                            break;
+                    }
+
+
+                    if(check) {
                         list.add(new UsersListRecyclerViewModel(
                                 childSnapshot.child(FirebaseModel.node_firstName).getValue().toString(),
                                 childSnapshot.child(FirebaseModel.node_lastName).getValue().toString(),

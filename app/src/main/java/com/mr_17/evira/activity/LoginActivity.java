@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                                     msg = "Sorry you cannot login, your account has been blocked.";
                                     break;
                                 case "Admin":
-                                    allowed = Boolean.parseBoolean(snapshot.child(FirebaseModel.node_isAdmin).getValue().toString());
+                                    allowed = Boolean.parseBoolean(snapshot.child(FirebaseModel.node_isAdmin).getValue().toString()) && !(Boolean.parseBoolean(snapshot.child(FirebaseModel.node_isBlocked).getValue().toString()));
                                     msg = "Sorry you are not authorised to enter here...";
                                     break;
                                 case "Super Admin":
